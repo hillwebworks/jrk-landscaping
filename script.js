@@ -381,6 +381,29 @@
 
 
   /* =====================================================
+     Hero background carousel
+     ===================================================== */
+  (function () {
+    var slides = $$('.hero-carousel-slide');
+    if (slides.length === 0) return;
+    var idx = 0;
+    var interval = 5500;
+
+    function next() {
+      slides[idx].classList.remove('active');
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add('active');
+    }
+
+    var t = setInterval(next, interval);
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) clearInterval(t);
+      else t = setInterval(next, interval);
+    });
+  })();
+
+
+  /* =====================================================
      2. Mobile Menu Toggle
      ===================================================== */
   var menuToggle = $('#menu-toggle');
